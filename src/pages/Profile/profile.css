@@ -1,0 +1,13 @@
+.hover_icon:hover{
+    /* cursor: progress; */
+    /* opacity: 1; */
+    border-radius: 50%;
+    filter: blur(1px) brightness(85%); 
+}
+.hover_image{
+    transform: scale(.5);
+}
+
+.menu_link{
+    color: green;
+}

@@ -1,0 +1,17 @@
+form{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 30%;
+    justify-content: center;
+}
+.form_container{
+display: flex;
+justify-content: center;
+padding: 1rem 0 0 0;
+};
+
+.login_parent{
+    display: flex;
+    justify-content: center;
+}
