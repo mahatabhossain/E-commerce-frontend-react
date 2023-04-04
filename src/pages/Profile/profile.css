@@ -10,4 +10,8 @@
 
 .menu_link{
     color: green;
+};
+.update_input:focus{
+    outline: 0;
+    /* border: 0px solid; */
 }

@@ -30,15 +30,10 @@ const {
                 <form>
                     <h2>Sign up</h2>
                     <h4>Already have an account <Link to='/login'>Sign in</Link></h4>
-                    <TextField id="outlined-basic" label="First name" variant="outlined"
-                        name='firstName'
-                        value={signUpData.firstName}
+                    <TextField id="outlined-basic" label="Full name" variant="outlined"
+                        name='fullName'
+                        value={signUpData.fullName}
                         onChange={e => setSignUpData(prev => ({ ...prev, [e.target.name]: e.target.value }))}
-                    />
-                    <TextField id="outlined-basic" label="Last name" variant="outlined"
-                        name='lastName'
-                        value={signUpData.lastName}
-                        onChange={e => { setSignUpData(prev => ({ ...prev, [e.target.name]: e.target.value })) }}
                     />
 
                     <TextField id="outlined-basic" label="email" variant="outlined"

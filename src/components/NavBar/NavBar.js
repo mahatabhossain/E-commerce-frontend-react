@@ -10,7 +10,6 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
@@ -22,6 +21,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import userContext from '../../context/UserContext';
 import axios from 'axios';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -98,17 +99,17 @@ export default function NavBar() {
         userProfile,
     } = useContext(userContext);
 
-    useEffect(()=>{
-        return async ()=>{
-          if(token){
-          const user = await axios.get(`${process.env.REACT_APP_ENDPOINT}/get/single/user`, {headers:{'token': token, 'Content-Type': 'application/json'}})
-          setProfileData(user.data.user);
-          setLoginRes(user)
-          }else{
-            navigate('/login')
-          }
+    useEffect(() => {
+        return async () => {
+            if (token) {
+                const user = await axios.get(`${process.env.REACT_APP_ENDPOINT}/get/single/user`, { headers: { 'token': token, 'Content-Type': 'application/json' } })
+                setProfileData(user.data.user);
+                setLoginRes(user)
+            } else {
+                navigate('/login')
+            }
         }
-      },[]);
+    }, []);
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -128,17 +129,17 @@ export default function NavBar() {
             onClose={handleMenuClose}
         >
             <Link to='/profile'>
-            <MenuItem onClick={() => {
-                handleMenuClose()
-                userProfile()
-                }}>Profile</MenuItem>
+                <MenuItem onClick={() => {
+                    handleMenuClose()
+                    userProfile()
+                }}><AccountCircle />&nbsp;Profile</MenuItem>
             </Link>
 
-            <MenuItem onClick={ ()=>{
-                    handleMenuClose()
-                    logoutUser()
-                }}
-                >Logout</MenuItem>
+            <MenuItem onClick={() => {
+                handleMenuClose()
+                logoutUser()
+            }}
+            ><LogoutIcon />&nbsp;Logout</MenuItem>
         </Menu>
     );
 
@@ -208,17 +209,6 @@ export default function NavBar() {
                             <Link className='menu_icon text_style' to='/'>Home</Link>
                         </Button>
                     </Typography>
-                    <div className='button_container'>
-                        <Button >
-                            <Link className='menu_icon' to='/test_one'>Tab One</Link>
-                        </Button>
-                        <Button >
-                            <Link className='menu_icon' to='/test_two'>Tab Two</Link>
-                        </Button>
-                        <Button >
-                            <Link className='menu_icon' to='/test_three'>Tab Three</Link>
-                        </Button>
-                    </div>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
@@ -231,21 +221,9 @@ export default function NavBar() {
 
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {loginResponse && loginResponse.status == 200 ?
-                                <IconButton
-                                    size="large"
-                                    edge="end"
-                                    aria-label="account of current user"
-                                    aria-controls={menuId}
-                                    aria-haspopup="true"
-                                    onClick={handleProfileMenuOpen}
-                                    color="inherit"
-                               
-                                >
-                                <> {loginResponse.data.user.firstName} &nbsp; <FingerprintIcon /></>
-                                </IconButton>
-                            : 
-                            <Link className='menu_icon' to='/login'>
+                        <Link className='vendor-nav' to='/vendor-section'>Become seller</Link>
+                        {/* CART */}
+                        <Link className='menu_icon' to='/Cart'>
                             <IconButton
                                 size="large"
                                 edge="end"
@@ -253,8 +231,36 @@ export default function NavBar() {
                                 aria-haspopup="true"
                                 color="inherit"
                             >
-                                <LoginIcon />
+                                <ShoppingCartIcon />
                             </IconButton>
+                        </Link>
+
+                        {/* LOGIN */}
+                        {loginResponse && loginResponse.status == 200 ?
+                            <IconButton
+                                className='login_section'
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+
+                            >
+                                <> {loginResponse.data.user.firstName} &nbsp; <FingerprintIcon /></>
+                            </IconButton>
+                            :
+                            <Link className='menu_icon' to='/login'>
+                                <IconButton
+                                    size="large"
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-haspopup="true"
+                                    color="inherit"
+                                >
+                                    <LoginIcon />
+                                </IconButton>
                             </Link>
 
                         }

@@ -9,6 +9,15 @@ const UserState = ({ children }) => {
   const [loginResponse, setLoginRes] = useState({});
   const [profileData, setProfileData] = useState({})
 
+  //EDIT STATES
+  const [editProfile, setEditProfile] = useState({
+    updateName: false,
+    updateEmail: false,
+    updatePhone: false,
+    updateAddress: false,
+  });
+
+
   //COMMON STATES
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,8 +35,7 @@ const UserState = ({ children }) => {
 
   //SIGN UP STATES
   const [signUpData, setSignUpData] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     password: '',
   })
@@ -52,8 +60,7 @@ const UserState = ({ children }) => {
         setAlertRes(prev => ({ ...prev, showAlert: true, message: signUpCreds.data.status, status: 'success' }))
       }
       setSignUpData({
-        firstName: '',
-        lastName: '',
+        fullName: '',
         email: '',
         password: '',
       });
@@ -126,7 +133,7 @@ const UserState = ({ children }) => {
   //LOGOUT USER
   const logoutUser = () => {
     localStorage.removeItem('token');
-    navigate('/login')
+    navigate('/')
     setLoginRes({});
   }
 
@@ -149,6 +156,9 @@ const UserState = ({ children }) => {
     signUpData,
     loginResponse,
     profileData,
+    editProfile,
+    setAlertRes,
+    setEditProfile,
     navigate,
     setProfileData,
     userProfile,
@@ -171,4 +181,4 @@ const UserState = ({ children }) => {
   )
 }
 
-export default UserState
+export default UserState;
