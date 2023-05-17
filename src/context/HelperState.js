@@ -44,6 +44,7 @@ const HelperState = ({children}) => {
       id,
       showPopup,
       sendOTP,
+      setState,
       handlePopupClose,
       setAnchorEl,
       handlePopupClick,

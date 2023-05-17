@@ -1,6 +1,6 @@
-.login_section{
-    font-size: 1rem !important;
-}
-.vendor-nav{
-    padding-top: 10px;
+.menu_bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }

@@ -95,7 +95,7 @@ const UserState = ({ children }) => {
     }
   }
 
-  // LOGOIN FUNCTIONS
+  // LOGOIN FUNCTIONS (USER)
   const handleClickLogin = async () => {
     setLoading(true)
     try {
@@ -110,13 +110,15 @@ const UserState = ({ children }) => {
       setLoginCreds({
         email: '',
         password: '',
-      })
+      });
+      navigate('/')
     } catch (error) {
       setAlertRes(prev => ({ ...prev, showAlert: true, message: error.response.data.message, status: '#d32f2f' }));
+      navigate('/login')
     }
     alertDelay();
     setLoading(false)
-    navigate('/')
+  
   }
 
   //USER PROFILE
@@ -138,17 +140,17 @@ const UserState = ({ children }) => {
   }
 
   //Getting User data
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    return async () => {
-      const userData = await axios.get(`${process.env.REACT_APP_ENDPOINT}/get/user`)
-      setUsers(userData.data.data)
-    }
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //   return async () => {
+  //     const userData = await axios.get(`${process.env.REACT_APP_ENDPOINT}/get/user`)
+  //     setUsers(userData.data.data)
+  //   }
 
-  }, [])
+  // }, [])
 
   const userContextData = {
-    users,
+    // users,
     loading,
     alertRes,
     showPassword,
@@ -164,7 +166,7 @@ const UserState = ({ children }) => {
     userProfile,
     logoutUser,
     setSignUpData,
-    setUsers,
+    // setUsers,
     setLoginCreds,
     setLoginRes,
     handleClickShowPassword,

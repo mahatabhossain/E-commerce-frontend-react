@@ -7,13 +7,10 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Link } from 'react-router-dom'
 import './NavStyle.css'
@@ -23,6 +20,7 @@ import userContext from '../../context/UserContext';
 import axios from 'axios';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HoverMenu from '../HoverMenu/HoverMenu'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -89,6 +87,11 @@ export default function NavBar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const navigateVendor = () => {
+        console.log("vendor navigated")
+        window.navigation.navigate("http://localhost:4200");
+    }
+
     //CONTEXT DATA
     const {
         loginResponse,
@@ -128,18 +131,18 @@ export default function NavBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <Link to='/profile'>
+            <Link to='/profile/account'>
                 <MenuItem onClick={() => {
                     handleMenuClose()
                     userProfile()
-                }}><AccountCircle />&nbsp;Profile</MenuItem>
+                }}><AccountCircle />My Profile</MenuItem>
             </Link>
 
             <MenuItem onClick={() => {
                 handleMenuClose()
                 logoutUser()
             }}
-            ><LogoutIcon />&nbsp;Logout</MenuItem>
+            ><LogoutIcon />Logout</MenuItem>
         </Menu>
     );
 
@@ -160,26 +163,6 @@ export default function NavBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="error">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
                     size="large"
@@ -196,8 +179,8 @@ export default function NavBar() {
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+        <Box sx={{ flexGrow: 1, }}>
+            <AppBar position="static" >
                 <Toolbar>
                     <Typography
                         variant="h6"
@@ -218,28 +201,13 @@ export default function NavBar() {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-
-                    <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <Link className='vendor-nav' to='/vendor-section'>Become seller</Link>
-                        {/* CART */}
-                        <Link className='menu_icon' to='/Cart'>
-                            <IconButton
-                                size="large"
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-haspopup="true"
-                                color="inherit"
-                            >
-                                <ShoppingCartIcon />
-                            </IconButton>
-                        </Link>
-
+                        <div className='menu_bar'>
                         {/* LOGIN */}
                         {loginResponse && loginResponse.status == 200 ?
                             <IconButton
                                 className='login_section'
-                                size="large"
+                                size="small"
                                 edge="end"
                                 aria-label="account of current user"
                                 aria-controls={menuId}
@@ -248,7 +216,7 @@ export default function NavBar() {
                                 color="inherit"
 
                             >
-                                <> {loginResponse.data.user.firstName} &nbsp; <FingerprintIcon /></>
+                                <> {loginResponse.data.user.fullName.split(' ')[0]}<FingerprintIcon /></>
                             </IconButton>
                             :
                             <Link className='menu_icon' to='/login'>
@@ -262,9 +230,46 @@ export default function NavBar() {
                                     <LoginIcon />
                                 </IconButton>
                             </Link>
-
                         }
+                        <Link  to=' '>
+                            <IconButton
+                            onClick={navigateVendor}
+                                size="small"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >Become seller
+                            </IconButton>
+                            </Link>
+                        <Link className='menu_icon' to=''>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >
+                                <HoverMenu />
+                            </IconButton>
+                        </Link>
+
+                        <Link className='vendor-nav' to='/Cart'>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >
+                                <ShoppingCartIcon />
+                            </IconButton>
+                        </Link> 
+                        </div>
                     </Box>
+
+                    <Box sx={{ flexGrow: 1 }} />
+
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"

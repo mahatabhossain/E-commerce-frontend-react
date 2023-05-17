@@ -1,12 +1,13 @@
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { IconButton, InputAdornment, TextField } from '@mui/material'
-import {useContext} from 'react'
+import { IconButton, InputAdornment, TextField, Toolbar } from '@mui/material'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import userContext from '../../context/UserContext'
-import BasicAlerts from '../Alert/BasicAlerts';
+
 import helperContext from '../../context/HelperContext'
+import BasicAlerts from '../../components/Alert/BasicAlerts'
 
 const Signup = () => {
     const {
@@ -18,17 +19,17 @@ const Signup = () => {
         signUpData,
         setSignUpData,
         onHandleSignUp,
-     } = useContext(userContext)
+    } = useContext(userContext)
 
-const {
-    handleClick
-} = useContext(helperContext)
+    const {
+        handleClick
+    } = useContext(helperContext)
 
     return (
         <div>
             <div className='form_container'>
                 <form>
-                    <h2>Sign up</h2>
+                    <h2>Create your account</h2>
                     <h4>Already have an account <Link to='/login'>Sign in</Link></h4>
                     <TextField id="outlined-basic" label="Full name" variant="outlined"
                         name='fullName'
@@ -62,13 +63,13 @@ const {
                             ),
                         }} />
                     <p><Link to=''>terms & conditions</Link></p>
-                    <LoadingButton loading={loading} onClick={ () => {onHandleSignUp(); handleClick()}} variant="contained">
+                    <LoadingButton loading={loading} onClick={() => { onHandleSignUp(); handleClick() }} variant="contained">
                         Sing up
                     </LoadingButton>
 
                 </form>
             </div>
-                {alertRes.showAlert && <center><BasicAlerts response = {alertRes}/></center>}
+            {alertRes.showAlert && <center><BasicAlerts response={alertRes} /></center>}
         </div>
     )
 }

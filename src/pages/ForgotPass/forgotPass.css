@@ -1,0 +1,13 @@
+.forgotPass_container{
+    display: flex;
+    justify-content: center;
+}
+
+/* .forgot_pass_input{
+    width: 25rem;
+} */
+
+h2{
+    font-size: 1.5rem;
+    font-weight: 400;
+}
