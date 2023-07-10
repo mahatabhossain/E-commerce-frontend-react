@@ -6,6 +6,7 @@ const HelperState = ({children}) => {
     const [state, setState] = useState(false);
     const [showPopup, setShowPopup] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [searchInput, setSearchInput] = useState('')
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
@@ -43,6 +44,8 @@ const HelperState = ({children}) => {
       open,
       id,
       showPopup,
+      searchInput,
+      setSearchInput,
       sendOTP,
       setState,
       handlePopupClose,

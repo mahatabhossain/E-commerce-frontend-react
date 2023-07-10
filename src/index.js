@@ -1,22 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
 // import reportWebVitals from './reportWebVitals';
-import UserState from './context/UserState';
-import { BrowserRouter } from 'react-router-dom';
-import HelperState from './context/HelperState';
+import { BrowserRouter } from "react-router-dom";
+import UserState from "./context/UserState";
+import HelperState from "./context/HelperState";
+import ProductState from "./context/ProductState";
 
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserState>
-        <HelperState>
-          <App />
-        </HelperState>
-      </UserState >
+        <ProductState>
+          <HelperState>
+            <App />
+          </HelperState>
+        </ProductState>
+      </UserState>
     </BrowserRouter>
   </React.StrictMode>
 );
