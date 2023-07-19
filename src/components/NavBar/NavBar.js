@@ -23,6 +23,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import HoverMenu from "../HoverMenu/HoverMenu";
 import helperContext from "../../context/HelperContext";
 import productContext from "../../context/ProductContext";
+import { viewCart } from "../../features/cart/cartSlice";
+import { useDispatch } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,6 +70,8 @@ export default function NavBar() {
   const token = localStorage.getItem("token");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const dispatch = useDispatch();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -294,7 +298,7 @@ export default function NavBar() {
                   aria-haspopup="true"
                   color="inherit"
                 >
-                  <ShoppingCartIcon />
+                  <ShoppingCartIcon onClick={()=> {dispatch(viewCart())}} />
                 </IconButton>
               </Link>
             </div>

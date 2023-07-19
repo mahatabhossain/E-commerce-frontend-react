@@ -101,6 +101,7 @@ const UserState = ({ children }) => {
     try {
       let loginRes = await axios.post(`${process.env.REACT_APP_ENDPOINT}/signin/user`, loginCreds);
       localStorage.setItem('token', loginRes.data.token)
+      localStorage.setItem('userId', loginRes.data.user._id)
       setLoginRes(loginRes)
       console.log("Form user state", loginRes)
       setProfileData(loginRes.data.user)

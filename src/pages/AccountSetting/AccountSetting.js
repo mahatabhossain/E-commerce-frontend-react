@@ -96,10 +96,9 @@ const Profile = () => {
         <div>
             <section className="text-gray-600 body-font">
                 <div className="container mx-auto">
-                    <div className="flex flex-col text-center w-full mb-20">
+                    <div className="flex flex-col text-center w-full mb-10">
                         <h1 className="text-2xl font-medium title-font mb-1 text-gray-900 tracking-widest">Welcome back {profileData.fullName && profileData.fullName.split(' ')[0]}</h1>
                         <p className="font-medium text-gray-600">Become a <Link className='menu_link' to='/vendor/signup'>Seller</Link> </p>
-                        <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them.</p>
                     </div>
                     <div className="flex flex-wrap -m-4">
                         <div className="p-4 lg:w-1/2">

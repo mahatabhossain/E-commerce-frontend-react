@@ -9,7 +9,7 @@ import userContext from "./context/UserContext";
 import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import BasicAlerts from "./components/Alert/BasicAlerts";
-import Cart from "./components/Cart/Cart";
+import CartContiner from "./components/Cart/CartContiner";
 import Profile from "./pages/Profile/Profile";
 import AccountSetting from "./pages/AccountSetting/AccountSetting";
 import Payment from "./pages/Payment/Payment";
@@ -69,7 +69,7 @@ function App() {
           <Route path="/profile/logout" element={<Logout />} />
         </Route>
         <Route path="/forgot/password" element={<ForgotPass />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<CartContiner />} />
         <Route path="/download/app" element={<DownloadApp />} />
         <Route path="/help/center" element={<HelpCenter />} />
         <Route path="/product/description" element={<ProductDesc/>} />

@@ -1,0 +1,16 @@
+.cart_btn_container{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+.place_order_container{
+    display: flex;
+    justify-content: center;
+}
+.total_amount{
+    text-align: center;
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    font-weight: 600;
+}

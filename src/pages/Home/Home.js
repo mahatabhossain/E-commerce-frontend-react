@@ -34,8 +34,10 @@ const Home = () => {
             }).length > 0?productData?.filter((el) => {
               if(!searchInput) return true
                return el.productName.toLowerCase().includes(searchInput.toLowerCase())
-            }).map((el) => (
-              <div className="xl:w-1/4 md:w-1/2 p-4" onClick={()=> getProductDesc(el._id)}>
+            }).map((el, i) => (
+              <div className="xl:w-1/4 md:w-1/2 p-4"
+              key={`el${i}`}
+               onClick={()=> getProductDesc(el._id)}>
                 <div className="bg-gray-100 p-6 rounded-lg">
                   <img
                     className="h-40 rounded w-full object-cover object-center mb-6"

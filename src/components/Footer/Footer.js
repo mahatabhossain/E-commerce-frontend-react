@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer_container">
       <footer className="text-white body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 py-12 mx-auto">
           <div className="flex flex-wrap md:text-left text-center order-first">
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">
@@ -101,9 +101,7 @@ const Footer = () => {
                 </button>
               </div>
               <p className="text-gray-500 text-sm mt-2 md:text-left text-center">
-                Want to know what we're up to 
-                <br className="lg:block hidden" />
-                Sing up our newsletter
+                Want to know what we're up to sing up our newsletter
               </p>
             </div>
           </div>
@@ -113,22 +111,7 @@ const Footer = () => {
         
         <div className="">
           <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-            {/* <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-              <span className="ml-3 text-xl">Tailblocks</span>
-            </a> */}
-            <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">
+            <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0">
             © 2022 All Rights Reserved —  
               <a
                 href=""
@@ -139,7 +122,7 @@ const Footer = () => {
                 e-Zone Pvt Ltd
               </a>
             </p>
-            <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+            <span className="inline-flex sm:ml-auto sm:mt-0 justify-center sm:justify-start">
               <a className="text-gray-500">
                 <svg
                   fill="currentColor"

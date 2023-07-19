@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addCart, addToCart } from "../../features/cart/cartSlice";
 
 const ProductDesc = () => {
     const SERVER_ENDPOINT = process.env.REACT_APP_ENDPOINT;
     const [product, setProduct] = useState([])
-
+    const dispatch = useDispatch()
+    
 
     const productId = localStorage.getItem('productId')
 
@@ -46,7 +49,9 @@ const ProductDesc = () => {
             </p>
             <div class="flex w-full md:justify-start justify-center items-end">
             <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-               <Link to='/cart'>Add to cart</Link> 
+               <Link 
+               to='/cart'
+               onClick={() => dispatch(addCart())}>Add to cart</Link> 
               </button> &nbsp;
               <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                 Buy now

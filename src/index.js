@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import UserState from "./context/UserState";
 import HelperState from "./context/HelperState";
 import ProductState from "./context/ProductState";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,7 +18,9 @@ root.render(
       <UserState>
         <ProductState>
           <HelperState>
-            <App />
+            <Provider store={store}>
+              <App />
+            </Provider>
           </HelperState>
         </ProductState>
       </UserState>
