@@ -68,7 +68,7 @@ const UserState = ({ children }) => {
       alertDelay()
       navigate('/login');
     } catch (e) {
-      setAlertRes(prev => ({ ...prev, showAlert: true, message: e.response.data.message, status: 'error' }))
+      setAlertRes(prev => ({ ...prev, showAlert: true, message: e.response?.data.message, status: 'error' }))
     }
   }
 

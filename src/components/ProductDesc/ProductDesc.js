@@ -1,30 +1,26 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addCart, addToCart } from "../../features/cart/cartSlice";
+import { addCart } from "../../features/cart/cartSlice";
 
 const ProductDesc = () => {
-    const SERVER_ENDPOINT = process.env.REACT_APP_ENDPOINT;
-    const [product, setProduct] = useState([])
-    const dispatch = useDispatch()
-    
+  const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
 
-    const productId = localStorage.getItem('productId')
+  const productId = localStorage.getItem("productId");
 
-    const getProductById = async (productId) => {
-      const product = await axios.get(`${SERVER_ENDPOINT}/get/product/${productId}`)
-      console.log("PRODUCT BY ID",product.data.product)
-
-      if(product){
-        setProduct(product.data.product)
-      }
+  const getProductById = async (productId) => {
+    const product = await axios.get(
+      `${process.env.REACT_APP_ENDPOINT}/get/product/${productId}`
+    );
+    if (product) {
+      setProduct(product.data.product);
     }
+  };
 
-
-    useEffect(() => {
-        getProductById(productId)
-    },[])
+  useEffect(() => {
+    getProductById(productId);
+  }, []);
 
   return (
     <div>
@@ -41,18 +37,16 @@ const ProductDesc = () => {
             <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
               {product.productDescription}
             </h1>
-            <p class="mb-8 leading-relaxed">
-                {product.productName}
-            </p>
-            <p class="mb-8 leading-relaxed">
-                {product.productPrice}
-            </p>
+            <p class="mb-8 leading-relaxed">{product.productName}</p>
+            <p class="mb-8 leading-relaxed">{product.productPrice}</p>
             <div class="flex w-full md:justify-start justify-center items-end">
-            <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-               <Link 
-               to='/cart'
-               onClick={() => dispatch(addCart())}>Add to cart</Link> 
-              </button> &nbsp;
+              <button
+                class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                onClick={() => dispatch(addCart())}
+              >
+                Add to cart
+              </button>{" "}
+              &nbsp;
               <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                 Buy now
               </button>

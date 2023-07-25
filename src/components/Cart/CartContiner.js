@@ -1,20 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Cart from "./Cart";
-import { clearCart, calculateTotalCost } from "../../features/cart/cartSlice";
+import { clearCart, calculateTotalCost, clearCartsItems } from "../../features/cart/cartSlice";
 import './cart.css'
+// import productContext from '../../context/ProductContext'
+
 
 const CartContiner = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { quantity, total, cartItems } = useSelector((store) => store.cart);
   const shopNow = () => navigate("/");
+  const dispatch = useDispatch();
+
+  const { quantity, total, cartItems } = useSelector((store) => store.cart);
+  
+  // const { productData } = useContext(productContext)
+
+  // const userItem = cartItems.map(item => {
+  //   const productId = item.productId
+  //   return productData.find(product => product._id === productId )
+  // })
+
+  // console.log("CartItem", cartItems)
+  // console.log("UserItem", userItem)
+
+  // const getAmount = productData.map(item => {
+  //   if(item?._id) return  cartItems.find(el => el.productId == item._id)
+  //   }).filter(el => el)
+    // console.log('AMOUNT', getAmount[0].amount)
 
 
   useEffect(()=> {
     dispatch(calculateTotalCost())
   }, [cartItems])
+  
 
   if (quantity < 1) {
     return (
@@ -35,20 +54,18 @@ const CartContiner = () => {
     <div>
       <section className="text-gray-600 body-font">
         <h2>Cart items</h2>
-        {cartItems && cartItems.map((item) => <Cart key={item.id} {...item} />)}
+        {cartItems && cartItems.map((item , i) => <Cart key={`item${i}`} {...item} /> )}
         <div className="cart_btn_container">
           <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              dispatch(clearCart());
-            }}
+            onClick={() => { dispatch(clearCartsItems()) }}
           >
             Clear Cart
           </button>
           <div className="place_order_container">
             <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >Place Order</button>
+            >Checkout</button>
             <p className="total_amount">${total}</p>
           </div>
         </div>
