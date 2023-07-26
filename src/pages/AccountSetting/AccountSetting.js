@@ -8,13 +8,31 @@ import CheckIcon from '@mui/icons-material/Check';
 import BasicAlerts from '../../components/Alert/BasicAlerts';
 import PopOver from '../../components/PopOver/PopOver';
 import helperContext from '../../context/HelperContext';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserAddress, saveAddress } from '../../features/user/userSlice';
 
 const Profile = () => {
     const [editedValue, setEditedValue] = useState('');
     const [updatedKey, setUpdatedKey] = useState('');
     const [hoverImage, setHoverImage] = useState(false);
     const profileImageRef = useRef();
+    const [addressForm, setAddressForm] = useState(false)
+    const [addressInput, setAddressInput] = useState({})
 
+    const dispath = useDispatch()
+    const { address } = useSelector(store => store.user)
+
+    console.log('USER ADDRESS FETCHED', address)
+
+    const handlInputeChange = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        setAddressInput(values => ({ ...values, [name]: value }))
+    }
 
     const {
         navigate,
@@ -33,6 +51,11 @@ const Profile = () => {
         showPopup,
         handlePopupClose
     } = useContext(helperContext)
+
+    const navigateVendor = () => {
+        console.log("vendor navigated");
+        window.navigation.navigate("http://localhost:4200");
+    };
 
     const handleEditValue = (e, key) => {
         setEditProfile(prev => ({ ...prev, [e]: true }))
@@ -82,6 +105,10 @@ const Profile = () => {
         reRenderUpdatedData()
     }
 
+    const addAddress = () => {
+        setAddressForm(prev => !prev)
+    }
+
     useEffect(() => {
         return async () => {
             if (localStorage.getItem('token')) {
@@ -92,13 +119,19 @@ const Profile = () => {
         }
     }, [])
 
+    useEffect(() => {
+        dispath(getUserAddress(profileData._id))
+    }, [])
+
     return (
         <div>
             <section className="text-gray-600 body-font">
                 <div className="container mx-auto">
                     <div className="flex flex-col text-center w-full mb-10">
                         <h1 className="text-2xl font-medium title-font mb-1 text-gray-900 tracking-widest">Welcome back {profileData.fullName && profileData.fullName.split(' ')[0]}</h1>
-                        <p className="font-medium text-gray-600">Become a <Link className='menu_link' to='/vendor/signup'>Seller</Link> </p>
+                        <p
+                            onClick={navigateVendor}
+                            className="font-medium text-gray-600">Become a <span style={{ color: 'green', cursor: 'pointer' }}>seller</span></p>
                     </div>
                     <div className="flex flex-wrap -m-4">
                         <div className="p-4 lg:w-1/2">
@@ -143,6 +176,89 @@ const Profile = () => {
                 </div>
             </section>
             {!showPopup && <PopOver onUpdate={onUpdate} />}
+            <section className='address_container'>
+                <h2>Add Your shipping address   <Button
+                    onClick={() => { addAddress() }}
+                    variant="contained">Add</Button></h2>
+
+                <Box>
+                    <div style={{ display: addressForm ? 'block' : 'none' }}>
+                        <TextField
+                            id="standard-multiline-flexible"
+                            label="Full Name"
+                            multiline
+                            maxRows={4}
+                            variant="standard"
+                            name='fullName'
+                            value={addressInput.fullName || ''}
+                            onChange={handlInputeChange}
+                        /><br />
+                        <TextField
+                            id="standard-multiline-flexible"
+                            label="Street"
+                            multiline
+                            maxRows={4}
+                            variant="standard"
+                            name='street'
+                            value={addressInput.street || ''}
+                            onChange={handlInputeChange}
+                        /><br />
+                        <TextField
+                            id="standard-multiline-flexible"
+                            label="Landmark"
+                            multiline
+                            maxRows={4}
+                            variant="standard"
+                            name='landmark'
+                            value={addressInput.landmark || ''}
+                            onChange={handlInputeChange}
+                        /><br />
+                        <TextField
+                            id="standard-multiline-flexible"
+                            label="Mobile"
+                            multiline
+                            maxRows={4}
+                            variant="standard"
+                            name='mobile'
+                            value={addressInput.mobile || ''}
+                            onChange={handlInputeChange}
+                        /><br />
+                        <TextField
+                            id="standard-multiline-flexible"
+                            label="PIN"
+                            multiline
+                            maxRows={4}
+                            variant="standard"
+                            name='pin'
+                            value={addressInput.pin || ''}
+                            onChange={handlInputeChange}
+                        />
+                        <div><br />
+                            <Button
+                                onClick={() => { dispath(saveAddress(profileData._id, addressInput, setAddressForm)) }}
+                                variant="contained">
+                                Save address
+                            </Button>
+                        </div>
+                    </div>
+                </Box>
+            </section><br />
+            {/* SHOW ADDRESS SECTION */}
+            <section>
+                <h2>Your address</h2>
+                {address.length > 0 ? 
+                    <div>
+                        <p>{address[0].fullName}</p>
+                        <p>{address[0].street}</p>
+                        <p>{address[0].mobile}</p>
+                        <p>{address[0].pin}</p>
+                        <p>{address[0].landmark}</p>
+                    </div>
+                    : <h2>Add Your shipping address   <Button
+                    onClick={() => { addAddress() }}
+                    variant="contained">Add</Button></h2>}
+
+            </section>
         </div>
     )
 }

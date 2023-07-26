@@ -33,7 +33,7 @@ const Login = () => {
       <div className='form_container'>
         <form>
           <h2>Sign in</h2>
-          <h4>Don't have account <Link to='/sign_up'>Sign up</Link></h4>
+          <h4>Don't have account <Link to='/sign_up' style={{color: 'green'}}>Sign up</Link></h4>
           <TextField id="outlined-basic" label="Email" variant="outlined"
             name='email'
             value={loginCreds.email}

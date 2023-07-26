@@ -102,6 +102,30 @@ export const removeCartItem = (userId, productId) => {
   }
 }
 
+export const increaseItem = (userId, productId) => {
+  return async (dispatch) => {
+    try{
+      const res = await axios.post(`${process.env.REACT_APP_ENDPOINT}/increase/item?userId=${userId}&productId=${productId}`)
+      console.log("PRODUCT INCREASED", res)
+      dispatch(cartSlice.actions.addQuantity(productId))
+    }catch(e){
+console.log(e)
+    }
+  }
+}
+
+export const decreaseItem = (userId, productId) => {
+  return async (dispatch) => {
+    try{
+      const res = await axios.post(`${process.env.REACT_APP_ENDPOINT}/decrease/item?userId=${userId}&productId=${productId}`)
+      console.log("PRODUCT DECREASED", res)
+      dispatch(cartSlice.actions.removeQuantity(productId))
+    }catch(e){
+      console.log(e)
+    }
+  }
+}
+
 export const {
   addToCart,
   addQuantity, 

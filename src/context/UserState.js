@@ -135,7 +135,8 @@ const UserState = ({ children }) => {
 
   //LOGOUT USER
   const logoutUser = () => {
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
+    localStorage.clear()
     navigate('/')
     setLoginRes({});
   }

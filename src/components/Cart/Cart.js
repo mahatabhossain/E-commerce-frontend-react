@@ -3,11 +3,12 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addQuantity,
+  decreaseItem,
   removeQuantity,
   removeItem,
   clearCart,
-  removeCartItem
+  removeCartItem,
+  increaseItem
 } from "../../features/cart/cartSlice";
 
 const Cart = ({
@@ -43,19 +44,19 @@ const Cart = ({
                     <div>
                       <AddIcon
                         onClick={() => {
-                          dispatch(addQuantity(productId));
+                          dispatch(increaseItem(userId, productId));
                         }}
                       />
                       {amount}
                       <RemoveIcon
                         onClick={() => {
                           if (amount == 1) {
-                            dispatch(removeItem(productId));
+                            dispatch(removeCartItem(userId, productId));
                           }
                           if (quantiry < 1) {
                             dispatch(clearCart());
                           }
-                          dispatch(removeQuantity(productId));
+                          dispatch(decreaseItem(userId, productId));
                         }}
                       />
                     </div>
