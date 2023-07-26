@@ -31,9 +31,9 @@ const cartSlice = createSlice({
         console.log('decresed')
     },
     removeItem: (state, action) => {
-        const itemId = action.payload
-        console.log(itemId)
-        const cartItem = state.cartItems.filter((item) => item.productId !== itemId)
+        const productId = action.payload
+        console.log("From action", productId)
+        const cartItem = state.cartItems.filter((item) => item.productId !== productId)
         state.cartItems = cartItem
         console.log('item removed')
     },
@@ -85,6 +85,17 @@ export const clearCartsItems = () => {
       const { updateCart } = await axios.delete(`${process.env.REACT_APP_ENDPOINT}/clear/cart/${userId}`)
       console.log("clear cart res", updateCart)
       dispatch(clearCart())
+    }catch(e){
+      console.log(e)
+    }
+  }
+}
+
+export const removeCartItem = (userId, productId) => {
+  return async (dispatch) => {
+    try{
+      const res = await axios.delete(`${process.env.REACT_APP_ENDPOINT}/delete/item?userId=${userId}&productId=${productId}`)
+      dispatch(cartSlice.actions.removeItem(productId))
     }catch(e){
       console.log(e)
     }

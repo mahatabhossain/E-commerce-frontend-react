@@ -7,6 +7,7 @@ import {
   removeQuantity,
   removeItem,
   clearCart,
+  removeCartItem
 } from "../../features/cart/cartSlice";
 
 const Cart = ({
@@ -60,7 +61,7 @@ const Cart = ({
                     </div>
                     <p
                       onClick={() => {
-                        dispatch(removeItem(productId));
+                        dispatch(removeCartItem(userId, productId));
                       }}
                     >
                       Remove
