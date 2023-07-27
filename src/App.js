@@ -21,6 +21,7 @@ import HelpCenter from "./pages/HelpCenter/HelpCenter";
 import { Toolbar } from "@mui/material";
 import Reducer from "./Reducers/Reducer";
 import ProductDesc from "./components/ProductDesc/ProductDesc";
+import Checkout from "./components/Checkout/Checkout";
 
 // import Test from './pages/Timer/Test';
 
@@ -73,7 +74,7 @@ function App() {
         <Route path="/download/app" element={<DownloadApp />} />
         <Route path="/help/center" element={<HelpCenter />} />
         <Route path="/product/description" element={<ProductDesc/>} />
-        {/* <Route path='/test' element={<Timer/>}/> */}
+        <Route path='/checkout' element={<Checkout/>}/>
 
         <Route path="/reducer/example" element={<Reducer />} />
       </Routes>

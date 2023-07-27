@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Cart from "./Cart";
 import { clearCart, calculateTotalCost, clearCartsItems } from "../../features/cart/cartSlice";
@@ -53,7 +53,11 @@ const CartContiner = () => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-        <h2>Cart items</h2>
+      <div class="flex flex-col text-center w-full">
+          <h3 class="sm:text-3xl text-2xl font-smalltitle-font mb-4 text-gray-900">
+            Order summary
+          </h3>
+        </div>
         {cartItems && cartItems.map((item , i) => <Cart key={`item${i}`} {...item} /> )}
         <div className="cart_btn_container">
           <button
@@ -63,9 +67,9 @@ const CartContiner = () => {
             Clear Cart
           </button>
           <div className="place_order_container">
-            <button
+            <Link to="/checkout"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >Checkout</button>
+            >Checkout</Link>
             <p className="total_amount">${total}</p>
           </div>
         </div>

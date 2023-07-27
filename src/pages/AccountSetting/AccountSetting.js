@@ -26,7 +26,7 @@ const Profile = () => {
     const dispath = useDispatch()
     const { address } = useSelector(store => store.user)
 
-    console.log('USER ADDRESS FETCHED', address)
+    // console.log('USER ADDRESS FETCHED', address)
 
     const handlInputeChange = (e) => {
         const name = e.target.name
