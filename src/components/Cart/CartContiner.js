@@ -13,7 +13,7 @@ const CartContiner = () => {
   const dispatch = useDispatch();
 
   const { quantity, total, cartItems } = useSelector((store) => store.cart);
-  
+
   // const { productData } = useContext(productContext)
 
   // const userItem = cartItems.map(item => {
@@ -27,13 +27,13 @@ const CartContiner = () => {
   // const getAmount = productData.map(item => {
   //   if(item?._id) return  cartItems.find(el => el.productId == item._id)
   //   }).filter(el => el)
-    // console.log('AMOUNT', getAmount[0].amount)
+  // console.log('AMOUNT', getAmount[0].amount)
 
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(calculateTotalCost())
   }, [cartItems])
-  
+
 
   if (quantity < 1) {
     return (
@@ -51,30 +51,30 @@ const CartContiner = () => {
   }
 
   return (
-    <div>
-      <section className="text-gray-600 body-font">
-      <div class="flex flex-col text-center w-full">
-          <h3 class="sm:text-3xl text-2xl font-smalltitle-font mb-4 text-gray-900">
-            Order summary
+    <section className="text-gray-600 body-font">
+      <div className="container px-5 py-6 mx-auto">
+        <div className="flex flex-col text-center w-full">
+          <h3 className="sm:text-3xl text-2xl font-smalltitle-font mb-4 text-gray-900">
+            Cart items
           </h3>
         </div>
-        {cartItems && cartItems.map((item , i) => <Cart key={`item${i}`} {...item} /> )}
+        {cartItems && cartItems.map((item, i) => <Cart key={`item${i}`} {...item} />)}
         <div className="cart_btn_container">
           <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => { dispatch(clearCartsItems()) }}
           >
             Clear Cart
           </button>
           <div className="place_order_container">
             <Link to="/checkout"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >Checkout</Link>
             <p className="total_amount">${total}</p>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -8,6 +8,8 @@ import UserState from "./context/UserState";
 import HelperState from "./context/HelperState";
 import ProductState from "./context/ProductState";
 import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor } from "./store";
 import { store } from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -19,7 +21,9 @@ root.render(
         <ProductState>
           <HelperState>
             <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
               <App />
+              </PersistGate>
             </Provider>
           </HelperState>
         </ProductState>

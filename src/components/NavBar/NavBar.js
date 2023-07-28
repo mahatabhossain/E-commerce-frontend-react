@@ -24,7 +24,8 @@ import HoverMenu from "../HoverMenu/HoverMenu";
 import helperContext from "../../context/HelperContext";
 import productContext from "../../context/ProductContext";
 import { viewCart } from "../../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Badge } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,12 +68,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+
   const token = localStorage.getItem("token");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const dispatch = useDispatch();
-
+  const { cartItems } = useSelector(store => store.cart)
+  console.log('FORM NAVBAR', cartItems)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -298,7 +301,15 @@ export default function NavBar() {
                   aria-haspopup="true"
                   color="inherit"
                 >
-                  <ShoppingCartIcon onClick={()=> {dispatch(viewCart())}} />
+                  {/* <ShoppingCartIcon onClick={()=> {dispatch(viewCart())}} />
+                  <span>{cartItems.length}</span> */}
+
+                  <Badge color="secondary" badgeContent={cartItems.length}>
+        <ShoppingCartIcon onClick={()=> {dispatch(viewCart())}} />
+      </Badge>
+
+
+
                 </IconButton>
               </Link>
             </div>

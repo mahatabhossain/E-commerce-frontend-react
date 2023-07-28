@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addCart } from "../../features/cart/cartSlice";
 
 const ProductDesc = () => {
   const [product, setProduct] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const productId = localStorage.getItem("productId");
 
@@ -17,6 +19,11 @@ const ProductDesc = () => {
       setProduct(product.data.product);
     }
   };
+
+  const checkoutProduct = (productId) => {
+    navigate('/checkout')
+    localStorage.setItem('checkedOutId', productId)
+  }
 
   useEffect(() => {
     getProductById(productId);
@@ -47,7 +54,9 @@ const ProductDesc = () => {
                 Add to cart
               </button>{" "}
               &nbsp;
-              <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+              <button 
+              onClick={() => checkoutProduct(product._id)}
+              className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                 Buy now
               </button>
             </div>
