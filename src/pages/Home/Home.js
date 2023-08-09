@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import productContext from "../../context/ProductContext";
 import helperContext from "../../context/HelperContext";
-
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 const Home = () => {
   const { productData } = useContext(productContext);
@@ -11,16 +12,12 @@ const Home = () => {
 
   console.log("FROM HOME", searchInput)
   const navigate = useNavigate();
-  
+
   const getProductDesc = (id) => {
     navigate('product/description')
     console.log('PRODUCT ID', id)
     localStorage.setItem('productId', id)
   }
-
-  // const searchedOutput = productData.filter((el) => {
-
-  // })
 
   return (
     <div>
@@ -28,16 +25,16 @@ const Home = () => {
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">
             {productData?.filter((el) => {
-              if(!searchInput) return true
-               return el.productName.toLowerCase().includes(searchInput.toLowerCase())
+              if (!searchInput) return true
+              return el.productName.toLowerCase().includes(searchInput.toLowerCase())
 
-            }).length > 0?productData?.filter((el) => {
-              if(!searchInput) return true
-               return el.productName.toLowerCase().includes(searchInput.toLowerCase())
+            }).length > 0 ? productData?.filter((el) => {
+              if (!searchInput) return true
+              return el.productName.toLowerCase().includes(searchInput.toLowerCase())
             }).map((el, i) => (
               <div className="xl:w-1/4 md:w-1/2 p-4"
-              key={`el${i}`}
-               onClick={()=> getProductDesc(el._id)}>
+                key={`el${i}`}
+                onClick={() => getProductDesc(el._id)}>
                 <div className="bg-gray-100 p-6 rounded-lg">
                   <img
                     className="h-40 rounded w-full object-cover object-center mb-6"
@@ -50,6 +47,11 @@ const Home = () => {
                   <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
                     {el.productPrice}
                   </h2>
+                  <span>
+                  <Stack spacing={1}>
+                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} size="small" />
+                  </Stack>
+                  </span>
                   <p className="leading-relaxed text-base">
                     {el.productDescription}
                   </p>

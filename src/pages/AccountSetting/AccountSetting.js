@@ -113,7 +113,8 @@ const Profile = () => {
         return async () => {
             if (localStorage.getItem('token')) {
                 reRenderUpdatedData()
-            } else {
+            } 
+            else {
                 navigate('/login')
             }
         }

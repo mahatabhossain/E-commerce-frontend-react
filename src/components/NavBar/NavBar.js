@@ -75,7 +75,7 @@ export default function NavBar() {
 
   const dispatch = useDispatch();
   const { cartItems } = useSelector(store => store.cart)
-  console.log('FORM NAVBAR', cartItems)
+  // console.log('FORM NAVBAR', cartItems)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -289,7 +289,7 @@ export default function NavBar() {
                   aria-haspopup="true"
                   color="inherit"
                 >
-                  <HoverMenu />
+                  {/* <HoverMenu /> */}
                 </IconButton>
               </Link>
 
