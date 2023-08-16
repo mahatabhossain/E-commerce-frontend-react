@@ -1,6 +1,6 @@
 import "./App.css";
 import { useContext, useEffect, useState } from "react";
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
@@ -27,7 +27,7 @@ import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   //Default time for logout
-  const [expireTime, setExpireTime] = useState(5 * 1000 * 60);
+  const [expireTime, setExpireTime] = useState(10 * 1000 * 60);
   let timeOutId;
 
   //AUTO LOGOUT ON INACTIVE
@@ -73,8 +73,8 @@ function App() {
         <Route path="/cart" element={<CartContiner />} />
         <Route path="/download/app" element={<DownloadApp />} />
         <Route path="/help/center" element={<HelpCenter />} />
-        <Route path="/product/description" element={<ProductDesc/>} />
-        <Route path='/checkout' element={<Checkout/>}/>
+        <Route path="/product/description" element={<ProductDesc />} />
+        <Route path='/checkout' element={<Checkout />} />
 
         <Route path="/reducer/example" element={<Reducer />} />
       </Routes>

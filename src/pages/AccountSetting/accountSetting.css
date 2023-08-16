@@ -1,6 +1,9 @@
+.account_section_continer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .hover_icon:hover{
-    /* cursor: progress; */
-    /* opacity: 1; */
     border-radius: 50%;
     filter: blur(1px) brightness(85%); 
 }
@@ -14,4 +17,11 @@
 .update_input:focus{
     outline: 0;
     /* border: 0px solid; */
+}
+
+.profile_image{
+    max-height: 80%;
+    max-width: 80%;
+    border-radius: 50%;
+    background-size: cover;
 }

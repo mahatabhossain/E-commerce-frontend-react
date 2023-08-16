@@ -57,7 +57,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-            )) : <p>No data found</p>
+            )) : setTimeout(() => <p>No data found</p>, 3000)
             }
           </div>
         </div>

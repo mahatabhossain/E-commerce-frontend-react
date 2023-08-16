@@ -12,7 +12,7 @@ const ProductState = ({ children }) => {
     // console.log('FETCHED PRODUCT', productDetails.data.data)
   }
 
-  console.log('FETCHED PRODUCT', productData)
+  // console.log('FETCHED PRODUCT', productData)
 
   useEffect(()=> {
     getAllproduct()

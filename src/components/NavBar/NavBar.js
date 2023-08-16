@@ -20,6 +20,7 @@ import userContext from "../../context/UserContext";
 import axios from "axios";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LogoutIcon from "@mui/icons-material/Logout";
+import HelpIcon from '@mui/icons-material/Help';
 import HoverMenu from "../HoverMenu/HoverMenu";
 import helperContext from "../../context/HelperContext";
 import productContext from "../../context/ProductContext";
@@ -166,12 +167,21 @@ export default function NavBar() {
       <MenuItem
         onClick={() => {
           handleMenuClose();
+        }}>
+        <HelpIcon />
+        <Link to='/help/center'>Help center</Link>
+      </MenuItem>
+
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
           logoutUser();
         }}
       >
         <LogoutIcon />
         Logout
       </MenuItem>
+
     </Menu>
   );
 
@@ -211,7 +221,7 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="div"
@@ -221,9 +231,11 @@ export default function NavBar() {
               <Link className="menu_icon text_style" to="/">
                 e-Zone
               </Link>
-              {/* <a href=''></a> */}
             </Button>
-          </Typography>
+          </Typography> */}
+          <Link  to="/">
+            <img className='menu_icon' src='/images/e-zone.png' />
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -305,8 +317,8 @@ export default function NavBar() {
                   <span>{cartItems.length}</span> */}
 
                   <Badge color="secondary" badgeContent={cartItems.length}>
-        <ShoppingCartIcon onClick={()=> {dispatch(viewCart())}} />
-      </Badge>
+                    <ShoppingCartIcon onClick={() => { dispatch(viewCart()) }} />
+                  </Badge>
 
 
 

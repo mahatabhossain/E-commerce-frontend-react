@@ -106,7 +106,7 @@ const UserState = ({ children }) => {
       console.log("Form user state", loginRes)
       setProfileData(loginRes.data.user)
       if (loginRes.status == 200) {
-        setAlertRes(prev => ({ ...prev, showAlert: true, message: loginRes.data.message, status: '#2e7d32' }));
+        setAlertRes(prev => ({ ...prev, showAlert: true, message: loginRes?.data?.message, status: '#2e7d32' }));
       }
       setLoginCreds({
         email: '',
