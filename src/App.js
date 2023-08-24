@@ -67,6 +67,7 @@ function App() {
           <Route path="/profile/orders" element={<Orders />} />
           <Route path="/profile/payment" element={<Payment />} />
           <Route path="/profile/delete/account" element={<DeleteAccount />} />
+          <Route path="/profile/help/center" element={<HelpCenter />} />
           <Route path="/profile/logout" element={<Logout />} />
         </Route>
         <Route path="/forgot/password" element={<ForgotPass />} />
@@ -75,7 +76,6 @@ function App() {
         <Route path="/help/center" element={<HelpCenter />} />
         <Route path="/product/description" element={<ProductDesc />} />
         <Route path='/checkout' element={<Checkout />} />
-
         <Route path="/reducer/example" element={<Reducer />} />
       </Routes>
       {alertRes.showAlert && <BasicAlerts response={alertRes} />}

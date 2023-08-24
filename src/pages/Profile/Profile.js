@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -21,7 +20,7 @@ const drawerWidth = 220;
 export default function ClippedDrawer() {
 
     const profilePaths = ['orders', 'account', 'payment'];
-    const profileControl = ['delete/account', 'logout'];
+    const profileControl = ['help/center', 'logout'];
     const profileControlIcon = [ <PersonRemoveIcon/>, <LogoutIcon/>];
     const profielPathsIcon = [<ShoppingBasketIcon/>, <SettingsIcon/>, <PaymentIcon/>];
 
@@ -60,7 +59,7 @@ export default function ClippedDrawer() {
                     </List>
                     <Divider />
                     <List>
-                        {['Delete Account', 'Logout'].map((text, index) => (
+                        {['Help Center', 'Logout'].map((text, index) => (
                             <Link key={index + text} to={profileControl[index]}>
                                 <ListItem  disablePadding>
                                     <ListItemButton>

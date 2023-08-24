@@ -28,14 +28,14 @@ const Checkout = () => {
 
     console.log("Payment handlar called", localStorage.getItem('userId'), product.productPrice)
     
-    // const response = await axios.post(
-    //   `${process.env.REACT_APP_ENDPOINT}/place/order/${localStorage.getItem('userId')}`,
-    //   product.productPrice
-    // );
-
-    const response = await axios.get(
-      `${process.env.REACT_APP_ENDPOINT}/create/order`
+    const response = await axios.post(
+      `${process.env.REACT_APP_ENDPOINT}/place/order/${localStorage.getItem('userId')}`,
+      product.productPrice
     );
+
+    // const response = await axios.get(
+    //   `${process.env.REACT_APP_ENDPOINT}/create/order`
+    // );
 
     const { data } = response;
     console.log("PAYMENT RESPONSE", response);

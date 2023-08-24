@@ -19,12 +19,13 @@ import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import userContext from "../../context/UserContext";
 import axios from "axios";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import LogoutIcon from "@mui/icons-material/Logout";
 import HelpIcon from '@mui/icons-material/Help';
 import HoverMenu from "../HoverMenu/HoverMenu";
 import helperContext from "../../context/HelperContext";
 import productContext from "../../context/ProductContext";
-import { viewCart } from "../../features/cart/cartSlice";
+import { viewCart } from "../../slices/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Badge } from "@mui/material";
 
@@ -152,18 +153,29 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+
+      <Link to="/profile/orders">
+        <MenuItem
+          onClick={() => {
+            handleMenuClose();
+          }}
+        >
+          <ShoppingBagIcon />
+          Your Orders
+        </MenuItem>
+      </Link>
+
       <Link to="/profile/account">
         <MenuItem
           onClick={() => {
             handleMenuClose();
-            userProfile();
+
           }}
         >
           <AccountCircle />
           My Profile
         </MenuItem>
       </Link>
-
       <MenuItem
         onClick={() => {
           handleMenuClose();
@@ -202,18 +214,48 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
+      {loginResponse && loginResponse.status == 200 ? (
         <IconButton
-          size="large"
+          className="login_section"
+          size="small"
+          edge="end"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls={menuId}
           aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
           color="inherit"
         >
-          <AccountCircle />
+          <>
+            {" "}
+            {loginResponse.data.user.fullName.split(" ")[0]}
+            <FingerprintIcon />
+          </>
         </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      ) : (
+        <Link className="menu_icon" to="/login">
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <LoginIcon />
+          </IconButton>
+        </Link>
+      )}
+          <Link to=" ">
+                <IconButton
+                  onClick={navigateVendor}
+                  size="small"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  Become seller
+                </IconButton>
+              </Link>
     </Menu>
   );
 
@@ -221,19 +263,8 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            <Button>
-              <Link className="menu_icon text_style" to="/">
-                e-Zone
-              </Link>
-            </Button>
-          </Typography> */}
-          <Link  to="/">
+
+          <Link to="/">
             <img className='menu_icon' src='/images/e-zone.png' />
           </Link>
           <Search>
@@ -319,9 +350,6 @@ export default function NavBar() {
                   <Badge color="secondary" badgeContent={cartItems.length}>
                     <ShoppingCartIcon onClick={() => { dispatch(viewCart()) }} />
                   </Badge>
-
-
-
                 </IconButton>
               </Link>
             </div>

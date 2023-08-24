@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addCart } from "../../features/cart/cartSlice";
+import { addCart } from "../../slices/cart/cartSlice";
 
 const ProductDesc = () => {
   const [product, setProduct] = useState([]);

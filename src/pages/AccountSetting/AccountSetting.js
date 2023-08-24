@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAddress, saveAddress } from '../../features/user/userSlice';
+import { getUserAddress, saveAddress } from '../../slices/user/userSlice';
 
 const Profile = () => {
     const [editedValue, setEditedValue] = useState('');
@@ -138,9 +138,8 @@ const Profile = () => {
                     className="font-medium text-gray-600">Become a <span style={{ color: 'green', cursor: 'pointer' }}>seller</span></p>
             </div>
             <div className="account_section_continer">
-                {/* PROFILE IMAGE AND DETAILS CONTAINER */}
                 <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                    <div  onMouseOver={showCameraAvatar} onMouseLeave={hideCameraAvatar}>
+                    <div onMouseOver={showCameraAvatar} onMouseLeave={hideCameraAvatar}>
                         {!hoverImage ? <img alt="team" className="hover_icon profile_image" src={profileData.avatar} />
                             :
                             <img alt="team" onClick={selectProfileImage} className="hover_image profile_image" src="/images/camera.png" />
@@ -183,10 +182,6 @@ const Profile = () => {
                             onClick={() => { addAddress() }}
                             variant="contained">Add</Button></h2>
                     }
-                    {/* <h2>Add Your shipping address   <Button
-                    onClick={() => { addAddress() }}
-                    variant="contained">Add</Button></h2> */}
-
                     <Box>
                         <div style={{ display: addressForm ? 'block' : 'none' }}>
                             <TextField
@@ -251,7 +246,7 @@ const Profile = () => {
                     <div>
                         <span className='text-xl'>Your Adress</span>
                         {address.length > 0 ?
-                            
+
                             <div className='flex justify-center gap-x-4'>
                                 <div className='flex flex-col '>
                                     <span>Full Name:</span>
@@ -273,27 +268,8 @@ const Profile = () => {
                         }
                     </div>
                 </div>
-                {/* SHOW ADDRESS SECTION */}
-                {/* <div>
-                    {address.length > 0 ?
-                        <div>
-                            <h2>Your address</h2>
-                            <p>{address[0].fullName}</p>
-                            <p>{address[0].street}</p>
-                            <p>{address[0].mobile}</p>
-                            <p>{address[0].pin}</p>
-                            <p>{address[0].landmark}</p>
-                        </div>
-                        : <h2>Please add your address</h2>
-                    }
-                </div> */}
             </div>
-
-            {/* </div>
-                    </div> */}
-            {/* </section> */}
             {!showPopup && <PopOver onUpdate={onUpdate} />}
-            {/* </div> */}
         </div>
     )
 }

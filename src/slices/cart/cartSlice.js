@@ -18,30 +18,30 @@ const cartSlice = createSlice({
       state.cartItems = payload
     },
     addQuantity: (state, action) => {
-        const itemId = action.payload
-        console.log("ITEM ID", itemId)
-        const cartItem = state.cartItems.find(item => item.productId === itemId)
-        console.log("increased", cartItem);
-        cartItem.amount = cartItem.amount + 1;
+      const itemId = action.payload
+      console.log("ITEM ID", itemId)
+      const cartItem = state.cartItems.find(item => item.productId === itemId)
+      console.log("increased", cartItem);
+      cartItem.amount = cartItem.amount + 1;
     },
     removeQuantity: (state, action) => {
-        const itemId = action.payload
-        const cartItem = state.cartItems.find((item) => item.productId === itemId)
-        cartItem.amount = cartItem.amount - 1
-        console.log('decresed')
+      const itemId = action.payload
+      const cartItem = state.cartItems.find((item) => item.productId === itemId)
+      cartItem.amount = cartItem.amount - 1
+      console.log('decresed')
     },
     removeItem: (state, action) => {
-        const productId = action.payload
-        console.log("From action", productId)
-        const cartItem = state.cartItems.filter((item) => item.productId !== productId)
-        state.cartItems = cartItem
-        console.log('item removed')
+      const productId = action.payload
+      console.log("From action", productId)
+      const cartItem = state.cartItems.filter((item) => item.productId !== productId)
+      state.cartItems = cartItem
+      console.log('item removed')
     },
     calculateTotalCost: (state, action) => {
       let amount = 0
       let total = 0
       state.cartItems?.forEach((item) => {
-        if(item.amount && item?.price){
+        if (item.amount && item?.price) {
           amount += item.amount
           total += +item.price * item.amount
         }
@@ -53,7 +53,7 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       console.log("Cart clear")
       state.cartItems = []
-  },
+    },
   },
 });
 
@@ -63,9 +63,9 @@ export const addCart = () => {
   return async (dispatch) => {
     console.log('ADD TO CART CALLED')
     const productId = localStorage.getItem('productId')
-    const res = await axios.post(`${process.env.REACT_APP_ENDPOINT}/add/cart`, {userId,productId })
+    const res = await axios.post(`${process.env.REACT_APP_ENDPOINT}/add/cart`, { userId, productId })
     console.log('ADDED TO CART', res.data.userDetails.cart)
-    
+
   }
 }
 
@@ -79,13 +79,13 @@ export const viewCart = () => {
 }
 
 export const clearCartsItems = () => {
-  return async(dispatch) => {
-    try{
+  return async (dispatch) => {
+    try {
       console.log("CLEAR CART CLICKED", userId)
       const { updateCart } = await axios.delete(`${process.env.REACT_APP_ENDPOINT}/clear/cart/${userId}`)
       console.log("clear cart res", updateCart)
       dispatch(clearCart())
-    }catch(e){
+    } catch (e) {
       console.log(e)
     }
   }
@@ -93,10 +93,10 @@ export const clearCartsItems = () => {
 
 export const removeCartItem = (userId, productId) => {
   return async (dispatch) => {
-    try{
+    try {
       const res = await axios.delete(`${process.env.REACT_APP_ENDPOINT}/delete/item?userId=${userId}&productId=${productId}`)
       dispatch(cartSlice.actions.removeItem(productId))
-    }catch(e){
+    } catch (e) {
       console.log(e)
     }
   }
@@ -104,23 +104,23 @@ export const removeCartItem = (userId, productId) => {
 
 export const increaseItem = (userId, productId) => {
   return async (dispatch) => {
-    try{
+    try {
       const res = await axios.post(`${process.env.REACT_APP_ENDPOINT}/increase/item?userId=${userId}&productId=${productId}`)
       console.log("PRODUCT INCREASED", res)
       dispatch(cartSlice.actions.addQuantity(productId))
-    }catch(e){
-console.log(e)
+    } catch (e) {
+      console.log(e)
     }
   }
 }
 
 export const decreaseItem = (userId, productId) => {
   return async (dispatch) => {
-    try{
+    try {
       const res = await axios.post(`${process.env.REACT_APP_ENDPOINT}/decrease/item?userId=${userId}&productId=${productId}`)
       console.log("PRODUCT DECREASED", res)
       dispatch(cartSlice.actions.removeQuantity(productId))
-    }catch(e){
+    } catch (e) {
       console.log(e)
     }
   }
@@ -128,11 +128,11 @@ export const decreaseItem = (userId, productId) => {
 
 export const {
   addToCart,
-  addQuantity, 
-  removeQuantity, 
-  clearCart, 
+  addQuantity,
+  removeQuantity,
+  clearCart,
   removeItem,
   calculateTotalCost,
- } = cartSlice.actions;
- 
+} = cartSlice.actions;
+
 export default cartSlice.reducer;

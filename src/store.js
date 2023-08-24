@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import cartReducer from './features/cart/cartSlice'
-import userReducer from './features/user/userSlice'
+import cartReducer from './slices/cart/cartSlice'
+import userReducer from './slices/user/userSlice'
+import orderReducer from './slices/orders/orderSlice'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PERSIST, PURGE, REGISTER, PAUSE } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     cart: cartReducer,
     user: userReducer,
+    orders: orderReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

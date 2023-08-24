@@ -5,6 +5,7 @@ import productContext from "../../context/ProductContext";
 import helperContext from "../../context/HelperContext";
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
+import Carousel from "../../components/Carousel/Carousel";
 
 const Home = () => {
   const { productData } = useContext(productContext);
@@ -21,6 +22,7 @@ const Home = () => {
 
   return (
     <div>
+      <Carousel />
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">

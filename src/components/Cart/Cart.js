@@ -9,7 +9,7 @@ import {
   clearCart,
   removeCartItem,
   increaseItem
-} from "../../features/cart/cartSlice";
+} from "../../slices/cart/cartSlice";
 
 const Cart = ({
   productId,
