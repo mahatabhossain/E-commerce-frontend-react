@@ -114,7 +114,8 @@ const UserState = ({ children }) => {
       });
       navigate('/')
     } catch (error) {
-      setAlertRes(prev => ({ ...prev, showAlert: true, message: error.response.data.message, status: '#d32f2f' }));
+      console.log(error)
+      // setAlertRes(prev => ({ ...prev, showAlert: true, message: error.response.data?.message, status: '#d32f2f' }));
       navigate('/login')
     }
     alertDelay();

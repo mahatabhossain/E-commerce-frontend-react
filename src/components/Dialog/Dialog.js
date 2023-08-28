@@ -7,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
+import { useNavigate } from 'react-router-dom';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -20,6 +21,15 @@ const Transition = React.forwardRef(function Transition(
 export default function AlertDialogSlide() {
   const [open, setOpen] = React.useState(false);
 
+  const navigate  = useNavigate()
+
+  const logoutUser = () => {
+    // localStorage.removeItem('token');
+    localStorage.clear()
+    navigate('/')
+    // setLoginRes({});
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,7 +41,7 @@ export default function AlertDialogSlide() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Slide in alert dialog
+        Logout your account
       </Button>
       <Dialog
         open={open}
@@ -40,16 +50,18 @@ export default function AlertDialogSlide() {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle>{"Are you sure you want to logout"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+            You will be logged out just click on logout button otherwise click cancel.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={() => {
+            handleClose()
+            logoutUser()
+          } }>Logout</Button>
         </DialogActions>
       </Dialog>
     </div>
