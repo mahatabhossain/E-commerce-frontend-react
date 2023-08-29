@@ -1,6 +1,3 @@
-# # Multistage docker build
-# # Build docker image for react app
-
 ARG IMAGE=node:18-alpine
 FROM $IMAGE
 
@@ -30,17 +27,13 @@ RUN  sed -i '/user  nginx;/d' /etc/nginx/nginx.conf \
     && chmod -R g+w /var/cache/nginx \
     && chown -R $UID:0 /etc/nginx \
     && chmod -R g+w /etc/nginx
-    
-# COPY ./dockerEntryPoint/docker-entrypoint.sh /
-# ENTRYPOINT ["/docker-entrypoint.sh"]  
+
+COPY ./dockerEntryPoint/docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
 # Copy the content into nginx folder
-# COPY ./dist/vertikalitiFirebase /usr/share/nginx/
-
-COPY /build /usr/share/nginx/html
-
+COPY /build /usr/share/nginx/
 # copy the nginx congif file
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-
 
 EXPOSE 8080
 
