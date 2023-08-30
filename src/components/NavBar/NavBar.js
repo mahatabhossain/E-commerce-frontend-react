@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -20,9 +18,7 @@ import userContext from "../../context/UserContext";
 import axios from "axios";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import LogoutIcon from "@mui/icons-material/Logout";
 import HelpIcon from '@mui/icons-material/Help';
-import HoverMenu from "../HoverMenu/HoverMenu";
 import helperContext from "../../context/HelperContext";
 import productContext from "../../context/ProductContext";
 import { viewCart } from "../../slices/cart/cartSlice";
@@ -106,7 +102,6 @@ export default function NavBar() {
   //CONTEXT DATA
   const {
     loginResponse,
-    logoutUser,
     navigate,
     setLoginRes,
     setProfileData,
@@ -183,17 +178,6 @@ export default function NavBar() {
         <HelpIcon />
         <Link to='/help/center'>Help center</Link>
       </MenuItem>
-
-      <MenuItem
-        onClick={() => {
-          handleMenuClose();
-          logoutUser();
-        }}
-      >
-        <LogoutIcon />
-        Logout
-      </MenuItem>
-
     </Menu>
   );
 

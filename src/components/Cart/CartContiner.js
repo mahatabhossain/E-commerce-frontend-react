@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Cart from "./Cart";
 import { clearCart, calculateTotalCost, clearCartsItems } from "../../slices/cart/cartSlice";
 import './cart.css'
-// import productContext from '../../context/ProductContext'
-
+import Dialog from '../Dialog/Dialog'
 
 const CartContiner = () => {
   const navigate = useNavigate();
@@ -13,22 +12,6 @@ const CartContiner = () => {
   const dispatch = useDispatch();
 
   const { quantity, total, cartItems } = useSelector((store) => store.cart);
-
-  // const { productData } = useContext(productContext)
-
-  // const userItem = cartItems.map(item => {
-  //   const productId = item.productId
-  //   return productData.find(product => product._id === productId )
-  // })
-
-  // console.log("CartItem", cartItems)
-  // console.log("UserItem", userItem)
-
-  // const getAmount = productData.map(item => {
-  //   if(item?._id) return  cartItems.find(el => el.productId == item._id)
-  //   }).filter(el => el)
-  // console.log('AMOUNT', getAmount[0].amount)
-
 
   useEffect(() => {
     dispatch(calculateTotalCost())
@@ -64,7 +47,7 @@ const CartContiner = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => { dispatch(clearCartsItems()) }}
           >
-            Clear Cart
+            <Dialog />
           </button>
           <div className="place_order_container">
             <Link to="/checkout"
