@@ -94,9 +94,19 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const navigateVendor = () => {
+  const navigateVendor = (e) => {
+    e.preventDefault();
     console.log("vendor navigated");
-    window.navigation.navigate("http://localhost:4200");
+    if (!(e.target instanceof HTMLElement))
+      return;
+    const anchor = e.target.closest('a');
+    if (anchor !== null) {
+      anchor.target = '_blank';
+      anchor.rel = 'noopener';
+      window.navigation.navigate("http://13.127.42.202:8000");
+    }
+      // window.navigation.navigate("http://localhost:4200");
+
   };
 
   //CONTEXT DATA
@@ -228,18 +238,22 @@ export default function NavBar() {
           </IconButton>
         </Link>
       )}
-          <Link to=" ">
-                <IconButton
-                  onClick={navigateVendor}
-                  size="small"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-haspopup="true"
-                  color="inherit"
-                >
-                  Become seller
-                </IconButton>
-              </Link>
+      <a
+      href="http://localhost:4200"
+      target={"_blank"} 
+      rel="noopener noreferrer"
+      >
+        <IconButton
+          onClick={navigateVendor}
+          size="small"
+          edge="end"
+          aria-label="account of current user"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          Become seller
+        </IconButton>
+      </a>
     </Menu>
   );
 
